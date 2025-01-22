@@ -77,49 +77,41 @@ function wpdocs_codex_book_init() {
 
     $schema = [
         'columns' => [
-            'id' => [
+            'ID' => [
                 'type' => 'BIGINT(20) UNSIGNED',
                 'attributes' => 'NOT NULL AUTO_INCREMENT',
                 'primary' => true,
             ],
-            'isbn' => [
-                'type' => 'TINYTEXT',
-                'attributes' => 'NOT NULL',
+            'book_author' => [
+                'type' => 'BIGINT(20) UNSIGNED',
+                'attributes' => "NOT NULL DEFAULT '0'",
             ],
-            'title' => [
-                'type' => 'MEDIUMTEXT',
-                'attributes' => 'NOT NULL',
-            ],
-            'author' => [
-                'type' => 'MEDIUMTEXT',
-                'attributes' => 'NOT NULL',
-            ],
-            'date_created' => [
+            'book_date' => [
                 'type' => 'DATETIME',
+                'attributes' => "NOT NULL DEFAULT '0000-00-00 00:00:00'",
+            ],
+            'book_content' => [
+                'type' => 'LONGTEXT',
                 'attributes' => 'NOT NULL',
             ],
-            'date_published' => [
-                'type' => 'DATETIME',
+            'book_title' => [
+                'type' => 'TEXT',
                 'attributes' => 'NOT NULL',
             ],
         ],
-        'primary_key' => ['id'],
+        'primary_key' => ['ID'],
         'indexes' => [
-            'isbn_index' => [
-                'columns' => ['isbn'],
-                'unique' => true,
+            'post_author_index' => [
+                'columns' => ['book_author'],
             ],
-        ],
-        'foreign_keys' => [
-            'fk_example' => [
-                'columns' => ['author'],
-                'referenced_table' => 'authors',
-                'referenced_columns' => ['id'],
-                'on_delete' => 'CASCADE',
+            'post_date_index' => [
+                'columns' => ['book_date'],
             ],
         ],
     ];
+    
 
+    
     $args = array(
         'labels'             => $labels,
         'schema'             => $schema,
