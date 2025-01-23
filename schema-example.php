@@ -1,7 +1,5 @@
 <?php
 // Example
-// -----------
-
 
 /**
  * Register a custom post type called "book".
