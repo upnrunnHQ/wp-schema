@@ -46,8 +46,6 @@ To use this custom post type, add the following code to your WordPress plugin or
  * @see get_post_type_labels() for label keys.
  */
 function wpdocs_codex_book_init() {
-    $max_index_length = 191;
-
     $labels = array(
         'name'                  => _x( 'Books', 'Post type general name', 'textdomain' ),
         'singular_name'         => _x( 'Book', 'Post type singular name', 'textdomain' ),
@@ -109,8 +107,6 @@ function wpdocs_codex_book_init() {
             ],
         ],
     ];
-    
-
     
     $args = array(
         'labels'             => $labels,
