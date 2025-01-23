@@ -1,5 +1,5 @@
 # wp-schema
-WP Schema: Register different Models/DB in WordPress
+WP Schema: Register different Models in the WordPress Database. (WIP)
 
 Client Code\
 +++++++++++++++++++++++\
