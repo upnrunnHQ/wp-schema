@@ -80,30 +80,30 @@ function wpdocs_codex_book_init() {
                 'attributes' => 'NOT NULL AUTO_INCREMENT',
                 'primary' => true,
             ],
-            'book_author' => [
+            'model_author' => [
                 'type' => 'BIGINT(20) UNSIGNED',
                 'attributes' => "NOT NULL DEFAULT '0'",
             ],
-            'book_date' => [
+            'model_date' => [
                 'type' => 'DATETIME',
                 'attributes' => "NOT NULL DEFAULT '0000-00-00 00:00:00'",
             ],
-            'book_content' => [
+            'model_content' => [
                 'type' => 'LONGTEXT',
                 'attributes' => 'NOT NULL',
             ],
-            'book_title' => [
+            'model_title' => [
                 'type' => 'TEXT',
                 'attributes' => 'NOT NULL',
             ],
         ],
         'primary_key' => ['ID'],
         'indexes' => [
-            'post_author_index' => [
-                'columns' => ['book_author'],
+            'model_author_index' => [
+                'columns' => ['model_author'],
             ],
-            'post_date_index' => [
-                'columns' => ['book_date'],
+            'model_date_index' => [
+                'columns' => ['model_date'],
             ],
         ],
     ];
@@ -128,3 +128,32 @@ function wpdocs_codex_book_init() {
 }
 
 add_action( 'init', 'wpdocs_codex_book_init' );
+
+
+// Set up the query arguments for multiple model types.
+$args = [
+    'model_type'     => [ 'movie', 'book' ],  // multiple model types
+    'posts_per_page' => 10,
+    'offset'         => 0,
+];
+
+// The Query.
+$the_query = new WP_Model_Query( $args );
+
+// The Loop.
+if ( $the_query->have_models() ) {
+    echo '<ul>';
+    while ( $model = $the_query->the_model() ) {
+        // Assuming each model has a 'title' property
+        echo '<li>' . esc_html( $model->model_title ) . '</li>';
+		echo "<pre>";
+		print_r($model); 
+		echo "</pre>";
+    }
+    echo '</ul>';
+} else {
+    esc_html_e( 'Sorry, no models matched your criteria.' ); // if no data added. Please add some data through PHPMYADMIN
+}
+
+// Reset model data after the loop.
+$the_query->reset_modeldata();
