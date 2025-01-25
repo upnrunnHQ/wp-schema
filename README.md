@@ -146,9 +146,9 @@ if ( $the_query->have_models() ) {
     while ( $model = $the_query->the_model() ) {
         // Assuming each model has a 'title' property
         echo '<li>' . esc_html( $model->model_title ) . '</li>';
-		echo "<pre>";
-		print_r($model); 
-		echo "</pre>";
+	// echo "<pre>";
+	// print_r($model); 
+	// echo "</pre>";
     }
     echo '</ul>';
 } else {
